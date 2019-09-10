@@ -17,7 +17,7 @@ class ShopController extends Controller {
     ctx.body = {
       _data: {
         // token: token || '',
-        tip: '签名有效',
+        // tip: '签名有效',
         category_list: {
           ...list
         }
