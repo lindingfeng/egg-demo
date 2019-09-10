@@ -4,6 +4,7 @@
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
-  const { router, controller } = app
-  router.post('/api/getShopList', controller.shop.getShopList)
+  const { ctx, router, controller, middleware } = app
+  router.get('/api/getShopList', middleware.verifyToken(), controller.shop.getShopList)
+  // router.get('/api/getShopList', controller.shop.getShopList)
 }
