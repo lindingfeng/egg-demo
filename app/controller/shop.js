@@ -11,11 +11,11 @@ class HomeController extends Controller {
   async getShopList() {
     const { ctx, app } = this
     // const token = app.middleware.jsonwebtoken.sign({ userId: 221520 }, 'lindf', { expiresIn: 60*10 })
-    const token = app.middleware.jsonwebtoken.verify(ctx.request.query.token, 'lindf')
+    // const token = app.middleware.jsonwebtoken.verify(ctx.request.query.token, 'lindf')
     const list = await app.mysql.get('shop_category_list')
     ctx.body = {
       _data: {
-        token: token || '',
+        // token: token || '',
         category_list: {
           ...list
         }

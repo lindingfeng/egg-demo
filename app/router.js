@@ -5,5 +5,5 @@
  */
 module.exports = app => {
   const { router, controller } = app
-  router.get('/api/getShopList', controller.shop.getShopList)
+  router.post('/api/getShopList', controller.shop.getShopList)
 }
