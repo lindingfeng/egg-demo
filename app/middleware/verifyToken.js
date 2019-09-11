@@ -13,7 +13,6 @@ module.exports = options => {
         await jwt.verify(ctx.query.token, 'lindf')
         await next()
       } catch (err) {
-        // console.log(err)
         if (err.message === 'jwt expired') {
           ctx.body = configStatus({}, 1001, '未登录或token过期')
           return

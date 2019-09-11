@@ -11,18 +11,16 @@ module.exports = appInfo => {
    * @type {Egg.EggAppConfig}
    **/
   const config = exports = {
+    /*
+     * @desc: 配置egg-mysql
+     * @doc: https://github.com/eggjs/egg-mysql
+    */
     mysql: {
-      // 单数据库信息配置
       client: {
-        // host
         host: '132.232.35.229',
-        // 端口号
         port: '3306',
-        // 用户名
         user: 'root',
-        // 密码
         password: 'wsjj1994',
-        // 数据库名
         database: 'lin',
       },
       // 是否加载到 app 上，默认开启
@@ -30,7 +28,10 @@ module.exports = appInfo => {
       // 是否加载到 agent 上，默认关闭
       agent: false,
     },
-    verifyToken: {},
+    /*
+     * @desc: 配置egg-cors
+     * @doc: https://github.com/eggjs/egg-cors
+    */
     security: {
       csrf: {
         enable: false,
@@ -39,8 +40,16 @@ module.exports = appInfo => {
       domainWhiteList: ['*']
     },
     cors: {
-      origin:'*',
+      origin: '*',
       allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
+    },
+    /*
+     * @desc: 配置egg-validate
+     * @doc: https://github.com/eggjs/egg-validate
+    */
+    validate: {
+      convert: true,
+      // validateRoot: false,
     }
   }
 
