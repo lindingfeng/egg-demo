@@ -8,7 +8,12 @@ class ShopService extends Service {
   */
   async getShopList() {
     const { app } = this
-    return await app.mysql.get('shop_category_list')
+    try {
+      const list = await app.mysql.get('shop_category_list')
+      return { errCode: 0, list }
+    } catch (err) {
+      return { errCode: 1, errStr: err.sqlMessage }
+    }
   }
 }
 

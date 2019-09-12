@@ -10,8 +10,6 @@ class ShopController extends Controller {
   */
   async getShopList() {
     const { ctx } = this
-    // const token = jwt.sign({ userId: 221520 }, 'lindf', { expiresIn: 60*10 })
-    // const token = app.middleware.jsonwebtoken.verify(ctx.request.query.token, 'lindf')
     // 校验入参
     // console.log('未校验:', ctx.query)
     const rules = {
@@ -23,19 +21,23 @@ class ShopController extends Controller {
       await ctx.validate(rules, ctx.query)
       // console.log('校验后:', ctx.query)
       try {
-        const list = await ctx.service.admin.mall.shop.getShopList()
-        ctx.body = configStatus({
-          category_list: {
-            ...list
-          }
-        })
+        const ret = await ctx.service.admin.mall.shop.getShopList()
+        if (ret.errCode === 0) {
+          ctx.body = configStatus({
+            category_list: {
+              ...ret.list
+            }
+          })
+          return
+        }
+        ctx.body = configStatus({}, 2000, ret.errStr)
       } catch (err) {
-        ctx.body = configStatus({}, (err.errno || 2000), (err.sqlMessage || '查询失败'))
+        console.log(err)
       }
     } catch (err) {
-      console.log(err.errors[0])
+      // console.log(err.errors[0])
       const errInfo = err.errors[0]
-      ctx.body = configStatus({}, 1009, `${errInfo.field} ${errInfo.message}`)
+      ctx.body = configStatus({}, 2000, `${errInfo.field} ${errInfo.message}`)
     }
   }
 }
