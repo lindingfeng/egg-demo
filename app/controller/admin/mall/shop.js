@@ -1,7 +1,8 @@
 'use strict'
 
 const Controller = require('egg').Controller
-const configStatus = require('../../utils/configStatus')
+const { pageInfo, priceByPenny } = require('../../../../utils/validate')
+const configStatus = require('../../../../utils/configStatus')
 
 class ShopController extends Controller {
   /*
@@ -12,16 +13,17 @@ class ShopController extends Controller {
     // const token = jwt.sign({ userId: 221520 }, 'lindf', { expiresIn: 60*10 })
     // const token = app.middleware.jsonwebtoken.verify(ctx.request.query.token, 'lindf')
     // 校验入参
+    // console.log('未校验:', ctx.query)
     const rules = {
-      // 入参为int类型，如果是其他类型，会尝试转为int类型（convertType: 'int'）
-      pageIndex: { type: 'int', required: false, allowEmpty: false, default: 1, min: 1, convertType: 'int' },
-      pageSize: { type: 'int', required: false, allowEmpty: true, default: 15, min: 1, convertType: 'int' }
+      pageIndex: pageInfo(false),
+      pageSize: pageInfo(false, 15),
+      price: priceByPenny(false)
     }
     try {
       await ctx.validate(rules, ctx.query)
-      console.log(ctx.query)
+      // console.log('校验后:', ctx.query)
       try {
-        const list = await ctx.service.shop.getShopList()
+        const list = await ctx.service.admin.mall.shop.getShopList()
         ctx.body = configStatus({
           category_list: {
             ...list
@@ -31,6 +33,7 @@ class ShopController extends Controller {
         ctx.body = configStatus({}, (err.errno || 2000), (err.sqlMessage || '查询失败'))
       }
     } catch (err) {
+      console.log(err.errors[0])
       const errInfo = err.errors[0]
       ctx.body = configStatus({}, 1009, `${errInfo.field} ${errInfo.message}`)
     }

@@ -45,11 +45,17 @@ module.exports = appInfo => {
     },
     /*
      * @desc: 配置egg-validate
-     * @doc: https://github.com/eggjs/egg-validate
+     * @npm: https://www.npmjs.com/package/parameter
+     * @gitHub: https://github.com/eggjs/egg-validate
     */
     validate: {
+      // 重要：可将入参转为特定类型
       convert: true,
-      // validateRoot: false,
+      /*
+       * 重要：入参类型为int时，将空字符串，NaN，Null转换为未定义
+       * 场景：入参类型为int时，客户端传参为空字符串，NaN，Null
+      */
+      // widelyUndefined: true,
     }
   }
 
