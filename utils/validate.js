@@ -2,7 +2,7 @@
  * @desc: 检验pageIndex(页码)
 */
 const pageInfo = (
-  isrequired = true,
+  isRequired = true,
   isDefault = 1,
   min = 1
 ) => {
@@ -12,7 +12,7 @@ const pageInfo = (
   */
   return {
     type: 'int',
-    required: isrequired,
+    required: isRequired,
     default: isDefault,
     min: min,
     convertType: 'int',
@@ -24,12 +24,12 @@ const pageInfo = (
  * @desc: 校验金额(单位：分)
 */
 const priceByPenny = (
-  isrequired = true,
+  isRequired = true,
   min = 1
 ) => {
   return {
     type: 'int',
-    required: isrequired,
+    required: isRequired,
     min: min,
     convertType: 'int'
   }

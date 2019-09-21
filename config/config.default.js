@@ -12,7 +12,7 @@ module.exports = appInfo => {
    **/
   const config = exports = {
     /*
-     * @desc: 配置egg-mysql
+     * @desc: 配置egg-mysql的options
      * @doc: https://github.com/eggjs/egg-mysql
     */
     mysql: {
@@ -29,7 +29,7 @@ module.exports = appInfo => {
       agent: false,
     },
     /*
-     * @desc: 配置egg-cors
+     * @desc: 配置egg-cors的options
      * @doc: https://github.com/eggjs/egg-cors
     */
     security: {
@@ -41,29 +41,43 @@ module.exports = appInfo => {
     },
     cors: {
       origin: '*',
-      allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
+      // allowHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
+      allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
     },
     /*
-     * @desc: 配置egg-validate
+     * @desc: 配置egg-validate的options
      * @npm: https://www.npmjs.com/package/parameter
      * @gitHub: https://github.com/eggjs/egg-validate
     */
     validate: {
-      // 重要：可将入参转为特定类型
+      // 重要：可将入参尽可能转为type指定的类型
       convert: true,
       /*
        * 重要：入参类型为int时，将空字符串，NaN，Null转换为未定义
        * 场景：入参类型为int时，客户端传参为空字符串，NaN，Null
       */
       // widelyUndefined: true,
-    }
+    },
+    /*
+     * @desc: 配置自定义中间件verifySignature的options
+    */
+    verifySignature: {},
+    /*
+     * @desc: 配置自定义中间件verifyToken的options
+    */
+    verifyToken: {}
   }
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1568011375248_8178'
 
-  // add your middleware config here
-  config.middleware = []
+  /*
+   * @desc: 可全局配置中间件，每个请求都会经过这里配置的中间件
+   * @tip: 配置的中间件按顺序执行，优先级最高，然后才是router定义的局部中间件
+  */
+  config.middleware = [
+    'verifySignature'
+  ]
 
   // add your user config here
   const userConfig = {

@@ -1,23 +1,19 @@
 'use strict'
 
 const Controller = require('egg').Controller
-const configStatus = require('../../../../utils/configStatus')
+const configStatus = require('../../../utils/configStatus')
 
-class UserController extends Controller {
+class CommonUserController extends Controller {
   /*
    * @desc: 登录
   */
-  async login() {
-    const { ctx, app } = this
-    // await app.controller.common.user.login({
-    //   type: 1
-    // })
+  async login({ type }) {
+    const { ctx } = this
     const rules = {
       phone: { type: 'string' },
       password: { type: 'string' }
     }
     try {
-      // await ctx.validate(rules, ctx.request.body)
       await ctx.validate(rules, ctx.query)
       // 检验手机号合法性
       if (!/^1\d{10}$/.test(ctx.query.phone)) {
@@ -25,8 +21,10 @@ class UserController extends Controller {
         return
       }
       try {
-        const ret = await ctx.service.admin.mall.user.login({
-          ...ctx.query
+        console.log(ctx.service)
+        const ret = await ctx.service.common.user.login({
+          ...ctx.query,
+          type
         })
         if (ret.errCode === 0) {
           ctx.body = configStatus({
@@ -61,7 +59,7 @@ class UserController extends Controller {
         return
       }
       try {
-        const ret = await ctx.service.admin.mall.user.registered({
+        const ret = await ctx.service.common.user.registered({
           ...ctx.query
         })
         if (ret.errCode === 0) {
@@ -81,4 +79,4 @@ class UserController extends Controller {
   }
 }
 
-module.exports = UserController
+module.exports = CommonUserController

@@ -8,6 +8,7 @@ const configStatus = require('../../utils/configStatus')
 */
 module.exports = options => {
   return async (ctx, next) => {
+    console.log('检验用户token有效性')
     if (ctx.query.token) {
       try {
         await jwt.verify(ctx.query.token, 'lindf')

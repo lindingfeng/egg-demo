@@ -49,20 +49,20 @@ const uploadUseQiniu = (bucket = 'static', readableStream) => {
     qiniu.conf.ACCESS_KEY = '07cNA0MRmRdC0saj02AeoG_UJOwUSlkonrFWP_EK'
     qiniu.conf.SECRET_KEY = '4WPSaPhzGe9Cjmh1os8rwZ6dUYVz8NgxDRXuk2mN'
 
-    //要上传的空间
+    // 要上传的空间
     const config = new qiniu.conf.Config()
     config.zone = qiniu.zone.Zone_z2
 
-    //上传到七牛后保存的文件名
+    // 上传到七牛后保存的文件名
     const key = ''
 
-    //构建上传策略函数
+    // 构建上传策略函数
     const putPolicy = new qiniu.rs.PutPolicy({
       scope: bucket
     })
     const token = putPolicy.uploadToken()
 
-    //构造上传函数
+    // 构造上传函数
     const formUploader = new qiniu.form_up.FormUploader(config)
     const extra = new qiniu.form_up.PutExtra()
     formUploader.putStream(token, key, readableStream, extra,
@@ -76,16 +76,14 @@ const uploadUseQiniu = (bucket = 'static', readableStream) => {
         } else {
           reject(respBody)
         }
-    })
+      }
+    )
   })
 }
 
 module.exports = {
   isObject,
   isArray,
-  verifyFloatPrice,
-  verifyNumber,
-  verifyToken,
   buildRamStr,
   uploadUseQiniu
 }
