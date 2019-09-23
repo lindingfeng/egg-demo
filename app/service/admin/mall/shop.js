@@ -10,6 +10,9 @@ class ShopService extends Service {
     const { app } = this
     try {
       const list = await app.mysql.select('shop_list')
+      list.forEach(ele => {
+        ele.shop_banner = JSON.parse(ele.shop_banner)
+      })
       return { errCode: 0, list }
     } catch (err) {
       return { errCode: 1, errStr: err.sqlMessage }

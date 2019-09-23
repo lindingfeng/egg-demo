@@ -8,10 +8,7 @@ class UserController extends Controller {
    * @desc: 登录
   */
   async login() {
-    const { ctx, app } = this
-    // await app.controller.common.user.login({
-    //   type: 1
-    // })
+    const { ctx } = this
     const rules = {
       phone: { type: 'string' },
       password: { type: 'string' }

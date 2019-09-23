@@ -12,6 +12,12 @@ module.exports = appInfo => {
    **/
   const config = exports = {
     /*
+     * @desc: 使用File模式上传文件时需配置下
+    */
+    multipart: {
+      mode: 'file'
+    },
+    /*
      * @desc: 配置egg-mysql的options
      * @doc: https://github.com/eggjs/egg-mysql
     */

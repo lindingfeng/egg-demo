@@ -8,7 +8,6 @@ const configStatus = require('../../utils/configStatus')
 */
 module.exports = options => {
   return async (ctx, next) => {
-    console.log('检验用户token有效性')
     if (ctx.query.token) {
       try {
         await jwt.verify(ctx.query.token, 'lindf')
@@ -16,6 +15,10 @@ module.exports = options => {
       } catch (err) {
         if (err.message === 'jwt expired') {
           ctx.body = configStatus({}, 1001, '未登录或token过期')
+          return
+        }
+        if (err.message === 'invalid signature') {
+          ctx.body = configStatus({}, 1001, '无效签名')
           return
         }
         ctx.body = configStatus({}, 1001, '解密用户信息失败')
