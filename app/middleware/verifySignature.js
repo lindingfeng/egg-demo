@@ -8,6 +8,17 @@ const configStatus = require('../../utils/configStatus')
 */
 module.exports = options => {
   return async (ctx, next) => {
+    const closeCheckList = options.closeCheck || []
+    let apiStr
+    if (ctx.url.indexOf('?') !== -1) {
+      apiStr = ctx.url.split('?')[0]
+    } else {
+      apiStr = ctx.url
+    }
+    if (apiStr.indexOf(closeCheckList) !== -1) {
+      await next()
+      return
+    }
     const rules = {
       pid: { type: 'string' },
       platform: { type: 'string' },
@@ -30,7 +41,6 @@ module.exports = options => {
       }
       await next()
     } catch (err) {
-      console.log(err)
       ctx.body = configStatus({}, 2000, '验签失败')
     }
   }

@@ -73,11 +73,19 @@ module.exports = appInfo => {
     /*
      * @desc: 配置自定义中间件verifySignature的options
     */
-    verifySignature: {},
+    verifySignature: {
+      // 关闭验签接口列表
+      closeCheck: [
+        '/admin/mall/getShopList'
+      ]
+    },
     /*
      * @desc: 配置自定义中间件verifyToken的options
     */
-    verifyToken: {}
+    verifyToken: {
+      // 关闭检验token接口列表
+      closeCheck: []
+    }
   }
 
   // use for cookie sign key, should change to your own and keep security

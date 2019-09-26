@@ -10,8 +10,6 @@ class ShopController extends Controller {
   */
   async getShopList() {
     const { ctx } = this
-    // 校验入参
-    // console.log('未校验:', ctx.query)
     const rules = {
       pageIndex: pageInfo(false),
       pageSize: pageInfo(false, 15),
@@ -19,7 +17,6 @@ class ShopController extends Controller {
     }
     try {
       await ctx.validate(rules, ctx.query)
-      // console.log('校验后:', ctx.query)
       try {
         const ret = await ctx.service.admin.mall.shop.getShopList()
         if (ret.errCode === 0) {
@@ -33,7 +30,6 @@ class ShopController extends Controller {
         console.log(err)
       }
     } catch (err) {
-      // console.log(err.errors[0])
       const errInfo = err.errors[0]
       ctx.body = configStatus({}, 2000, `${errInfo.field} ${errInfo.message}`)
     }
