@@ -10,7 +10,8 @@ module.exports = options => {
   return async (ctx, next) => {
     if (ctx.query.token) {
       try {
-        await jwt.verify(ctx.query.token, 'lindf')
+        let ret = await jwt.verify(ctx.query.token, 'lindf')
+        ctx.query.userId = ret.userId
         await next()
       } catch (err) {
         if (err.message === 'jwt expired') {

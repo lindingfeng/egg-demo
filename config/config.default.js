@@ -65,6 +65,12 @@ module.exports = appInfo => {
       // widelyUndefined: true,
     },
     /*
+     * @desc: 配置egg-static的options
+    */
+    static: {
+      maxAge: 31536000
+    },
+    /*
      * @desc: 配置自定义中间件verifySignature的options
     */
     verifySignature: {},
