@@ -18,19 +18,6 @@ class ShopService extends Service {
       return { errCode: 1, errStr: err.sqlMessage }
     }
   }
-
-  /*
-   * @desc: 获取商品分类列表
-  */
-  async getCategoryList() {
-    const { app } = this
-    try {
-      const list = await app.mysql.select('shop_category_list')
-      return { errCode: 0, list }
-    } catch (err) {
-      return { errCode: 1, errStr: err.sqlMessage }
-    }
-  }
 }
 
 module.exports = ShopService

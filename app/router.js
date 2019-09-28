@@ -5,12 +5,21 @@
  */
 module.exports = app => {
   const { router, controller, middleware } = app
-  router.get('/admin/mall/getShopList', middleware.verifyToken(), controller.admin.mall.shop.getShopList)
+  /*
+   * @desc: client/mall
+  */
+  router.get('/client/mall/getShopList', middleware.verifyToken(), controller.client.mall.shop.getShopList)
   router.get('/common/checkLoginState', controller.common.user.checkLoginState)
   router.post('/common/uploader', controller.common.file.uploaderByQiniu)
-  router.post('/admin/mall/login', controller.admin.mall.user.login)
-  router.post('/admin/mall/registered', controller.admin.mall.user.registered)
-  router.get('/admin/mall/getAddressList', middleware.verifyToken(), controller.admin.mall.user.getUserAddress)
-  router.get('/admin/mall/getAddressInfo', middleware.verifyToken(), controller.admin.mall.user.getUserAddressById)
-  router.post('/admin/mall/addAddress', middleware.verifyToken(), controller.admin.mall.user.addAddress)
+  router.post('/client/mall/login', controller.client.mall.user.login)
+  router.post('/client/mall/registered', controller.client.mall.user.registered)
+  router.get('/client/mall/getAddressList', middleware.verifyToken(), controller.client.mall.user.getUserAddress)
+  router.get('/client/mall/getAddressInfo', middleware.verifyToken(), controller.client.mall.user.getUserAddressById)
+  router.post('/client/mall/addAddress', middleware.verifyToken(), controller.client.mall.user.addAddress)
+  /*
+   * @desc: admin/mall
+  */
+  router.post('/admin/mall/login', controller.admin.mall.user.login)  
+  router.get('/admin/mall/getShopList', middleware.verifyToken(), controller.admin.mall.shop.getShopList)
+  router.get('/admin/mall/getCategoryList', middleware.verifyToken(), controller.admin.mall.shop.getCategoryList)
 }

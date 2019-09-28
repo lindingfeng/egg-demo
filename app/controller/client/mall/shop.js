@@ -18,39 +18,10 @@ class ShopController extends Controller {
     try {
       await ctx.validate(rules, ctx.query)
       try {
-        const ret = await ctx.service.admin.mall.shop.getShopList()
+        const ret = await ctx.service.client.mall.shop.getShopList()
         if (ret.errCode === 0) {
           ctx.body = configStatus({
             shop_list: ret.list
-          })
-          return
-        }
-        ctx.body = configStatus({}, 2000, ret.errStr)
-      } catch (err) {
-        console.log(err)
-      }
-    } catch (err) {
-      const errInfo = err.errors[0]
-      ctx.body = configStatus({}, 2000, `${errInfo.field} ${errInfo.message}`)
-    }
-  }
-
-  /*
-   * @desc: 获取商品分类列表
-  */
-  async getCategoryList () {
-    const { ctx } = this
-    const rules = {
-      pageIndex: pageInfo(false, 1),
-      pageSize: pageInfo(false, 15)
-    }
-    try {
-      await ctx.validate(rules, ctx.query)
-      try {
-        const ret = await ctx.service.admin.mall.shop.getCategoryList()
-        if (ret.errCode === 0) {
-          ctx.body = configStatus({
-            shop_category_list: ret.list || []
           })
           return
         }
