@@ -9,6 +9,7 @@ module.exports = app => {
    * @desc: client/mall
   */
   router.get('/client/mall/getShopList', middleware.verifyToken(), controller.client.mall.shop.getShopList)
+  router.get('/client/mall/getCategoryList', middleware.verifyToken(), controller.client.mall.shop.getCategoryList)
   router.get('/common/checkLoginState', controller.common.user.checkLoginState)
   router.post('/common/uploader', controller.common.file.uploaderByQiniu)
   router.post('/client/mall/login', controller.client.mall.user.login)

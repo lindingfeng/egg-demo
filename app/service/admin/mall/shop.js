@@ -18,7 +18,6 @@ class ShopService extends Service {
       return { errCode: 1, errStr: err.sqlMessage }
     }
   }
-
   /*
    * @desc: 获取商品分类列表
   */
@@ -26,6 +25,7 @@ class ShopService extends Service {
     const { app } = this
     try {
       const list = await app.mysql.select('shop_category_list')
+      console.log(list)
       return { errCode: 0, list }
     } catch (err) {
       return { errCode: 1, errStr: err.sqlMessage }

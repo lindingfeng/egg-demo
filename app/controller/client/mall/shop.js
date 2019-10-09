@@ -34,6 +34,21 @@ class ShopController extends Controller {
       ctx.body = configStatus({}, 2000, `${errInfo.field} ${errInfo.message}`)
     }
   }
+  async getCategoryList () {
+    const { ctx } = this
+    try {
+      const ret = await ctx.service.client.mall.shop.getCategoryList()
+      if (ret.errCode === 0) {
+        ctx.body = configStatus({
+          category_list: ret.list || []
+        })
+        return
+      }
+      ctx.body = configStatus({}, 2000, ret.errStr)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }
 
 module.exports = ShopController
