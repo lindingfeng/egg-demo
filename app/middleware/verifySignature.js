@@ -15,7 +15,14 @@ module.exports = options => {
     } else {
       apiStr = ctx.url
     }
-    if (apiStr.indexOf(closeCheckList) !== -1) {
+    let skipSign = false
+    for (let i = 0; i < closeCheckList.length; i++) {
+      if (apiStr.indexOf(closeCheckList[i]) !== -1) {
+        skipSign = true
+        break
+      }
+    }
+    if (skipSign) {
       await next()
       return
     }
