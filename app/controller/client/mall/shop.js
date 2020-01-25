@@ -21,7 +21,8 @@ class ShopController extends Controller {
         const ret = await ctx.service.client.mall.shop.getShopList()
         if (ret.errCode === 0) {
           ctx.body = configStatus({
-            shop_list: ret.list
+            shop_list: ret.list,
+            test: true
           })
           return
         }
