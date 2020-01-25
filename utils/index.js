@@ -54,7 +54,11 @@ const uploadUseQiniu = (bucket = 'static', readableStream) => {
     config.zone = qiniu.zone.Zone_z2
 
     // 上传到七牛后保存的文件名
-    const key = ''
+    const time = new Date().getTime()
+    const y = new Date().getFullYear()
+    const m = new Date().getMonth() + 1
+    const d = new Date().getDate()
+    const key = `${y}/${m}/${d}/${time}`
 
     // 构建上传策略函数
     const putPolicy = new qiniu.rs.PutPolicy({
