@@ -22,7 +22,7 @@ class ShopController extends Controller {
         if (ret.errCode === 0) {
           ctx.body = configStatus({
             shop_list: ret.list,
-            // test: true
+            test: true
           })
           return
         }
