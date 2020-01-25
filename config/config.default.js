@@ -76,6 +76,7 @@ module.exports = appInfo => {
     verifySignature: {
       // 关闭验签接口列表
       closeCheck: [
+        '/common/uploader',
         '/admin/mall/getShopList'
       ]
     },
