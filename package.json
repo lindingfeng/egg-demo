@@ -37,7 +37,7 @@
   "scripts": {
     "start": "egg-scripts start --daemon --port=3000 --title=egg-server-example",
     "stop": "egg-scripts stop --port=3000 --title=egg-server-example",
-    "stop all": "egg-scripts stop",
+    "stop-all": "egg-scripts stop",
     "dev": "egg-bin dev",
     "test-port": "egg-bin dev --port 3000",
     "debug": "egg-bin debug",
