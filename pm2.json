@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "name": "server",
+      "script": "npm",
+      "args": "start",
+      "max_memory_restart": "500M",
+      "out_file": "/home/wwwroot/egg/out.log",
+      "error_file":  "/home/wwwroot/egg/error.log",
+      "log_file":    "/home/wwwroot/egg/log.log",
+      "log_date_format" : "YYYY-MM-DD HH:mm Z"
+    }
+  ]
+}
