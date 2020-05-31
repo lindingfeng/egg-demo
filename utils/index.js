@@ -1,12 +1,12 @@
 const qiniu = require('qiniu')
 
 /*
- * @description: 判断数据类型是否为数组
+ * @description: 判断数据类型是否为对象
  * @author: lindingfeng
  * @date: 2019-08-02 23:09:03
 */
 const isObject = (data) => {
-  return Object.prototype.toString.call(data) === '[Object Object]'
+  return Object.prototype.toString.call(data) === '[object Object]'
 }
 
 /*
@@ -15,7 +15,25 @@ const isObject = (data) => {
  * @date: 2019-08-02 23:09:03
 */
 const isArray = (data) => {
-  return Array.isArray(data)
+  return Object.prototype.toString.call(data) === '[object Array]'
+}
+
+/*
+ * @description: 验证价格的正确性(含小数点)
+ * @author: lindingfeng
+ * @date: 2019-08-02 23:09:03
+*/
+const verifyFloatPrice = (data) => {
+  return /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/.test(data)
+}
+
+/*
+ * @description: 验证数量(0到~N)
+ * @author: lindingfeng
+ * @date: 2019-08-02 23:09:03
+*/
+const verifyNumber = (data) => {
+  return /^([0]{1}|[1-9]{1}[0-9]*)$/.test(data)
 }
 
 /*

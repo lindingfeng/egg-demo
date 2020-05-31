@@ -17,6 +17,7 @@ module.exports = app => {
   router.get('/client/mall/getAddressList', middleware.verifyToken(), controller.client.mall.user.getUserAddress)
   router.get('/client/mall/getAddressInfo', middleware.verifyToken(), controller.client.mall.user.getUserAddressById)
   router.post('/client/mall/addAddress', middleware.verifyToken(), controller.client.mall.user.addAddress)
+  router.post('/common/getWxSign', controller.common.third.getWxSign)
   /*
    * @desc: admin/mall
   */
